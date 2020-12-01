@@ -129,8 +129,9 @@ class WoW_WMO_Import_Doodad_WMV(bpy.types.Operator):
         game_data = getattr(bpy, "wow_game_data", None)
 
         if not game_data or not game_data.files:
-            self.report({'ERROR'}, "Failed to import model. Connect to game client first.")
-            return {'CANCELLED'}
+            print("\n\n### Loading game data ###")
+            bpy.ops.scene.load_wow_filesystem()
+            game_data = bpy.wow_game_data
 
         dir = bpy.path.abspath("//") if bpy.data.is_saved else None
         m2_path = wmv_get_last_m2()

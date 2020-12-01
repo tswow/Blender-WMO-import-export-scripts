@@ -49,8 +49,9 @@ class IMPORT_ADT_SCENE(bpy.types.Operator):
         game_data = getattr(bpy, "wow_game_data", None)
 
         if not game_data or not game_data.files:
-            self.report({'ERROR'}, "Failed to import model. Connect to game client first.")
-            return {'CANCELLED'}
+            print("\n\n### Loading game data ###")
+            bpy.ops.scene.load_wow_filesystem()
+            game_data = bpy.wow_game_data
 
         save_dir = bpy.path.abspath("//") if bpy.data.is_saved else None
 
@@ -224,8 +225,9 @@ class IMPORT_LAST_WMO_FROM_WMV(bpy.types.Operator):
         game_data = getattr(bpy, "wow_game_data", None)
 
         if not game_data or not game_data.files:
-            self.report({'ERROR'}, "Failed to import model. Connect to game client first.")
-            return {'CANCELLED'}
+            print("\n\n### Loading game data ###")
+            bpy.ops.scene.load_wow_filesystem()
+            game_data = bpy.wow_game_data
 
         dir = bpy.path.abspath("//") if bpy.data.is_saved else None
         wmo_path = self.wmv_get_last_wmo()
