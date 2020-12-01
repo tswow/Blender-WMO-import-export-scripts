@@ -202,3 +202,17 @@ class WOW_FILESYSTEM_LOAD_OP(bpy.types.Operator):
         self.report({'INFO'}, "WoW game data is loaded.")
 
         return {'FINISHED'}
+
+class WOW_FILESYSTEM_UNLOAD_OP(bpy.types.Operator):
+    bl_idname = 'scene.unload_wow_filesystem'
+    bl_label = 'Unload WoW filesystem'
+    bl_description = 'Unload World of Warcraft client files'
+    bl_options = {'REGISTER'}
+
+    def execute(self, context):
+        if hasattr(bpy, "wow_game_data"):
+            delattr(bpy, "wow_game_data")
+            self.report({'INFO'}, "WoW game data was unloaded.")
+        else:
+            self.report({'INFO'}, "WoW game data was already unloaded.")
+        return {'FINISHED'}
