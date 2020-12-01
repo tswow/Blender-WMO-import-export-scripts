@@ -51,6 +51,7 @@ from .wmo import export_wmo
 from .wmo import import_wmo
 from .wmo import wmo_file
 from .wmo import wmo_group
+from .m2 import import_m2
 
 importlib.reload(wmo_file)
 importlib.reload(wmo_group)
@@ -60,6 +61,7 @@ importlib.reload(enums)
 importlib.reload(operators)
 importlib.reload(panels)
 importlib.reload(mpq)
+importlib.reload(import_m2)
 
 class WMOPreferences(bpy.types.AddonPreferences):
     bl_idname = __package__
