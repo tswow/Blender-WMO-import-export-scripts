@@ -191,16 +191,14 @@ class WOW_FILESYSTEM_LOAD_OP(bpy.types.Operator):
             delattr(bpy, "wow_game_data")
             self.report({'INFO'}, "WoW game data is unloaded.")
 
-        else:
+        preferences = bpy.context.user_preferences.addons.get("io_scene_wmo").preferences
 
-            preferences = bpy.context.user_preferences.addons.get("io_scene_wmo").preferences
+        bpy.wow_game_data = WoWFileData(preferences.wow_path, preferences.blp_path)
 
-            bpy.wow_game_data = WoWFileData(preferences.wow_path, preferences.blp_path)
+        if not bpy.wow_game_data.files:
+            self.report({'ERROR'}, "WoW game data is not loaded. Check settings.")
+            return {'CANCELLED'}
 
-            if not bpy.wow_game_data.files:
-                self.report({'ERROR'}, "WoW game data is not loaded. Check settings.")
-                return {'CANCELLED'}
-
-            self.report({'INFO'}, "WoW game data is loaded.")
+        self.report({'INFO'}, "WoW game data is loaded.")
 
         return {'FINISHED'}
