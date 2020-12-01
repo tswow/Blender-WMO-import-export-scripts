@@ -210,7 +210,7 @@ def menu_export(self, context):
 
 
 def register():
-    addon_updater_ops.register(bl_info)
+    #addon_updater_ops.register(bl_info)
     idproperty.register()
     bpy.utils.register_module(__name__)
     panels.register()
